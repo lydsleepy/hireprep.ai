@@ -61,3 +61,23 @@ def test_docx_extraction_includes_table_text():
         result = extract_resume_text(b"fakedocx", "resume.docx")
     assert "John Doe" in result
     assert "Python" in result
+
+
+def test_invalid_docx_bytes_produces_friendly_error():
+    """Corrupted DOCX bytes should produce a user-friendly ValueError."""
+    with pytest.raises(ValueError, match="couldn't read any text"):
+        extract_resume_text(b"not a valid docx file at all", "corrupt.docx")
+
+
+def test_real_docx_short_text_rejected():
+    """Real python-docx generated DOCX with short text should be rejected."""
+    from docx import Document as DocxDocument
+    import io
+
+    doc = DocxDocument()
+    doc.add_paragraph("Short")
+    buf = io.BytesIO()
+    doc.save(buf)
+
+    with pytest.raises(ValueError, match="couldn't read any text"):
+        extract_resume_text(buf.getvalue(), "short.docx")

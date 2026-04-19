@@ -48,21 +48,23 @@ def _extract_pdf(file_bytes: bytes) -> str:
 
 
 def _extract_docx(file_bytes: bytes) -> str:
-    doc = Document(io.BytesIO(file_bytes))
-
-    parts: list[str] = []
-
-    for para in doc.paragraphs:
-        if para.text.strip():
-            parts.append(para.text.strip())
-
-    # Resumes often use tables for layout — extract those too
-    for table in doc.tables:
-        for row in table.rows:
-            row_texts = [cell.text.strip() for cell in row.cells if cell.text.strip()]
-            if row_texts:
-                parts.append("  ".join(row_texts))
-
+    try:
+        doc = Document(io.BytesIO(file_bytes))
+        parts: list[str] = []
+        for para in doc.paragraphs:
+            if para.text.strip():
+                parts.append(para.text.strip())
+        # Resumes often use tables for layout — extract those too
+        for table in doc.tables:
+            for row in table.rows:
+                row_texts = [cell.text.strip() for cell in row.cells if cell.text.strip()]
+                if row_texts:
+                    parts.append("  ".join(row_texts))
+    except Exception:
+        raise ValueError(
+            "We couldn't read any text from this file. If it's a scanned image, "
+            "please upload a text-based PDF or .docx instead."
+        )
     text = _clean("\n".join(parts))
     _require_min_text(text)
     return text
