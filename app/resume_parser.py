@@ -6,7 +6,7 @@ from pypdf import PdfReader, errors as pypdf_errors
 from docx import Document
 
 
-_MIN_TEXT_LENGTH = 20
+_MIN_TEXT_LENGTH = 100
 
 
 def extract_resume_text(file_bytes: bytes, filename: str) -> str:

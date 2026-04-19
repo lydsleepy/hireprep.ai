@@ -34,7 +34,7 @@ def test_pdf_extraction_returns_stripped_text():
     from unittest.mock import patch, MagicMock
     mock_reader = MagicMock()
     mock_page = MagicMock()
-    mock_page.extract_text.return_value = "  John Doe\n\n\nSoftware Engineer at Acme Corp\n\n"
+    mock_page.extract_text.return_value = "  John Doe\n\n\nSoftware Engineer at Acme Corp\nExperienced developer with 5 years building Python applications and distributed systems. Led migration from monolith to microservices.\n\n"
     mock_reader.pages = [mock_page]
     with patch("app.resume_parser.PdfReader", return_value=mock_reader):
         result = extract_resume_text(b"fakepdf", "resume.pdf")
@@ -48,9 +48,9 @@ def test_docx_extraction_includes_table_text():
     from unittest.mock import patch, MagicMock
     mock_doc = MagicMock()
     mock_para = MagicMock()
-    mock_para.text = "John Doe - Software Engineer"
+    mock_para.text = "John Doe - Senior Software Engineer with extensive experience in Python and distributed systems"
     mock_cell = MagicMock()
-    mock_cell.text = "Python | JavaScript | SQL"
+    mock_cell.text = "Python | JavaScript | SQL | Docker | Kubernetes | React | PostgreSQL"
     mock_row = MagicMock()
     mock_row.cells = [mock_cell]
     mock_table = MagicMock()
