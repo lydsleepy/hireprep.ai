@@ -1,5 +1,4 @@
 import io
-import re
 
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
