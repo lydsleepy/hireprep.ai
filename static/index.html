@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hireprep.ai — Job Application Prep</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo-link" aria-label="hireprep.ai home">
+        <img src="/assets/logo.svg" alt="hireprep.ai" class="logo" width="140" height="28" />
+      </a>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <p class="eyebrow">AI-POWERED JOB APPLICATION PREP</p>
+      <h1>Prepare for your next role.</h1>
+      <p class="subheading">Upload your resume and paste a job description. Generate a cover letter, practice questions, and a tailored resume in seconds.</p>
+    </section>
+
+    <!-- Inputs -->
+    <section class="inputs-section" aria-label="Inputs">
+      <div class="inputs-grid">
+
+        <!-- Resume upload card -->
+        <div class="card input-card" id="resume-card">
+          <label class="input-label" for="resume-file-input">Your resume</label>
+          <div
+            class="drop-zone"
+            id="drop-zone"
+            role="button"
+            tabindex="0"
+            aria-label="Upload resume — click or drag and drop"
+          >
+            <!-- Icon: document with arrow -->
+            <svg class="drop-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="12" x2="12" y2="18"/>
+              <polyline points="9 15 12 18 15 15"/>
+            </svg>
+            <p class="drop-primary">Drop your resume here</p>
+            <p class="drop-secondary">or <span class="drop-link">click to browse</span></p>
+            <p class="drop-hint">.pdf or .docx, up to 5 MB</p>
+          </div>
+          <input type="file" id="resume-file-input" accept=".pdf,.docx,.doc" aria-hidden="true" tabindex="-1" />
+
+          <!-- File preview (shown after upload) -->
+          <div class="file-preview hidden" id="file-preview" role="status">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <div class="file-info">
+              <span class="file-name" id="file-name"></span>
+              <span class="file-size" id="file-size"></span>
+            </div>
+            <button class="file-remove" id="file-remove" aria-label="Remove resume">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Job description card -->
+        <div class="card input-card" id="jd-card">
+          <label class="input-label" for="jd-textarea">Job description</label>
+          <div class="textarea-wrapper">
+            <textarea
+              id="jd-textarea"
+              class="jd-textarea"
+              placeholder="Paste the job description here..."
+              rows="12"
+              spellcheck="true"
+              aria-label="Job description"
+            ></textarea>
+            <span class="char-count" id="char-count" aria-live="polite">0 characters</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Action cards -->
+    <section class="actions-section" aria-label="Generate actions">
+      <div class="actions-grid">
+
+        <button class="card action-card" data-feature="cover_letter" aria-label="Generate cover letter">
+          <div class="action-icon-wrap">
+            <!-- Pencil / writing icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+            </svg>
+          </div>
+          <div class="action-text">
+            <span class="action-title">Cover letter</span>
+            <span class="action-desc">A personalized cover letter tailored to this role.</span>
+          </div>
+          <!-- Spinner (hidden by default) -->
+          <svg class="spinner hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.2"/>
+            <path d="M12 2a10 10 0 0 1 10 10" class="spinner-arc"/>
+          </svg>
+        </button>
+
+        <button class="card action-card" data-feature="practice_questions" aria-label="Generate practice questions">
+          <div class="action-icon-wrap">
+            <!-- Chat bubbles / questions icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="action-text">
+            <span class="action-title">Practice questions</span>
+            <span class="action-desc">Realistic interview questions for this role. Works with just a job description.</span>
+          </div>
+          <svg class="spinner hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.2"/>
+            <path d="M12 2a10 10 0 0 1 10 10" class="spinner-arc"/>
+          </svg>
+        </button>
+
+        <button class="card action-card" data-feature="resume_questions" aria-label="Generate resume-specific questions">
+          <div class="action-icon-wrap">
+            <!-- User search / magnifier icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+          <div class="action-text">
+            <span class="action-title">Resume questions</span>
+            <span class="action-desc">Questions an interviewer would likely ask based on your resume.</span>
+          </div>
+          <svg class="spinner hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.2"/>
+            <path d="M12 2a10 10 0 0 1 10 10" class="spinner-arc"/>
+          </svg>
+        </button>
+
+        <button class="card action-card" data-feature="tailored_resume" aria-label="Generate tailored resume">
+          <div class="action-icon-wrap">
+            <!-- List / resume icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </div>
+          <div class="action-text">
+            <span class="action-title">Tailored resume</span>
+            <span class="action-desc">Your resume rewritten to emphasize the most relevant experience.</span>
+          </div>
+          <svg class="spinner hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.2"/>
+            <path d="M12 2a10 10 0 0 1 10 10" class="spinner-arc"/>
+          </svg>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- Output section (hidden until first generation) -->
+    <section class="output-section hidden" id="output-section" aria-label="Generated output" aria-live="polite">
+      <div class="card output-card">
+        <div class="output-header">
+          <h2 class="output-title" id="output-title">Output</h2>
+          <div class="output-toolbar" role="toolbar" aria-label="Output actions">
+            <button class="tool-btn" id="btn-copy" aria-label="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span id="copy-label">Copy</span>
+            </button>
+            <button class="tool-btn" id="btn-download-pdf" aria-label="Download as PDF">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              PDF
+            </button>
+            <button class="tool-btn" id="btn-download-docx" aria-label="Download as DOCX">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              DOCX
+            </button>
+            <button class="tool-btn" id="btn-regenerate" aria-label="Regenerate">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+              Regenerate
+            </button>
+            <button class="tool-btn tool-btn--close" id="btn-close-output" aria-label="Close output">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <!-- Skeleton pulse (shown during loading) -->
+        <div class="output-skeleton hidden" id="output-skeleton" aria-hidden="true">
+          <div class="skeleton-line" style="width:85%"></div>
+          <div class="skeleton-line" style="width:70%"></div>
+          <div class="skeleton-line" style="width:90%"></div>
+          <div class="skeleton-line" style="width:60%"></div>
+          <div class="skeleton-line" style="width:80%"></div>
+        </div>
+        <pre class="output-text" id="output-text" tabindex="0"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <p>hireprep.ai &copy; <span id="footer-year"></span></p>
+  </footer>
+
+  <!-- ==================== ERROR MODAL ==================== -->
+  <div class="modal-backdrop hidden" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-message">
+    <div class="modal-card">
+      <div class="modal-icon-wrap" aria-hidden="true">
+        <!-- Warning triangle -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h2 class="modal-title" id="modal-title">Something's missing</h2>
+      <p class="modal-message" id="modal-message"></p>
+      <button class="btn-primary" id="modal-close">Got it</button>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
