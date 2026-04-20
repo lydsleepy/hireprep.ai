@@ -1,4 +1,5 @@
 .env
+PROJECT_DOCS.md
 __pycache__/
 *.pyc
 .venv/
