@@ -1,0 +1,547 @@
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  --bg:             #FAFBFF;
+  --surface:        #EFF2F9;
+  --surface-2:      #E4EBF1;
+  --border:         #D8DEE6;
+  --muted:          #B5BFC6;
+  --text-secondary: #6E7F8D;
+  --text-primary:   #2C3640;
+  --accent:         #3A4A56;
+  --accent-hover:   #2C3640;
+  --danger:         #C44A4A;
+  --success:        #4A8C5F;
+  --shadow-light:   #FFFFFF;
+  --shadow-dark:    rgba(22, 27, 29, 0.12);
+
+  --shadow-card:
+    -5px -5px 10px var(--shadow-light),
+     5px  5px 10px var(--shadow-dark);
+  --shadow-card-hover:
+    -8px -8px 16px var(--shadow-light),
+     8px  8px 16px var(--shadow-dark);
+  --shadow-inset:
+    inset -3px -3px 6px var(--shadow-light),
+    inset  3px  3px 6px var(--shadow-dark);
+
+  --radius-card:   16px;
+  --radius-btn:    12px;
+  --radius-input:  12px;
+}
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/* ============================================================
+   Utility
+   ============================================================ */
+.hidden { display: none !important; }
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-link { display: inline-flex; align-items: center; text-decoration: none; }
+.logo { height: 28px; width: auto; }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  max-width: 960px;
+  margin: 64px auto 0;
+  padding: 0 32px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.subheading {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   Card base
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+}
+
+/* ============================================================
+   Input section
+   ============================================================ */
+.inputs-section {
+  max-width: 960px;
+  margin: 48px auto 0;
+  padding: 0 32px;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.input-card { display: flex; flex-direction: column; gap: 12px; }
+
+.input-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Drop zone */
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-input);
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+}
+
+.drop-zone:hover, .drop-zone:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.drop-zone.drag-over {
+  border-color: var(--accent);
+  border-style: solid;
+  background: var(--surface-2);
+}
+
+.drop-icon { color: var(--muted); margin-bottom: 4px; }
+.drop-primary { font-weight: 500; font-size: 0.95rem; color: var(--text-primary); }
+.drop-secondary { font-size: 0.85rem; color: var(--text-secondary); }
+.drop-link { color: var(--accent); font-weight: 500; }
+.drop-hint { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+#resume-file-input { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+
+/* File preview */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border-radius: var(--radius-input);
+  box-shadow: var(--shadow-inset);
+  color: var(--text-secondary);
+}
+
+.file-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.file-name { font-weight: 500; font-size: 0.9rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-size { font-size: 0.78rem; color: var(--muted); }
+
+.file-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.file-remove:hover { color: var(--danger); }
+
+/* Job description textarea */
+.textarea-wrapper { position: relative; display: flex; flex-direction: column; flex: 1; }
+
+.jd-textarea {
+  width: 100%;
+  min-height: 240px;
+  max-height: 400px;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-input);
+  box-shadow: var(--shadow-inset);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.jd-textarea::placeholder { color: var(--muted); }
+.jd-textarea:focus { border-color: var(--accent); }
+
+.char-count {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* ============================================================
+   Actions section
+   ============================================================ */
+.actions-section {
+  max-width: 960px;
+  margin: 32px auto 0;
+  padding: 0 32px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  transition: box-shadow 0.18s, opacity 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.action-card:active {
+  box-shadow: var(--shadow-inset);
+}
+
+.action-card.loading {
+  pointer-events: none;
+}
+
+.action-card.dimmed {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.action-icon-wrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--surface-2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-shadow: var(--shadow-inset);
+}
+
+.action-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.action-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.action-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Spinner */
+.spinner {
+  flex-shrink: 0;
+  animation: spin 0.8s linear infinite;
+  color: var(--accent);
+}
+
+.spinner-arc {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Output section
+   ============================================================ */
+.output-section {
+  max-width: 960px;
+  margin: 32px auto 48px;
+  padding: 0 32px;
+}
+
+.output-card { padding: 0; }
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.output-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.output-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.tool-btn:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.tool-btn--close {
+  margin-left: 4px;
+  padding: 7px 9px;
+}
+
+.tool-btn--close:hover { color: var(--danger); }
+
+/* Skeleton */
+.output-skeleton {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-line {
+  height: 14px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* Output text */
+.output-text {
+  padding: 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-height: 600px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  outline: none;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  padding: 24px 32px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(46, 58, 68, 0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 24px;
+}
+
+.modal-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-hover);
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.modal-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--danger);
+  box-shadow: var(--shadow-inset);
+}
+
+.modal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-message {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.btn-primary {
+  padding: 10px 28px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover { background: var(--accent-hover); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  h1 { font-size: 1.8rem; }
+
+  .inputs-grid,
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header { padding: 0 16px; }
+  .hero,
+  .inputs-section,
+  .actions-section,
+  .output-section { padding: 0 16px; }
+
+  .hero { margin-top: 40px; }
+}
+
+@media (max-width: 480px) {
+  .output-toolbar { gap: 6px; }
+  .tool-btn { padding: 6px 10px; font-size: 0.78rem; }
+}
