@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 36" fill="none">
+  <!-- Mark: stacked offset squares suggesting layered documents -->
+  <rect x="3" y="9" width="22" height="22" rx="6" fill="#6E7F8D"/>
+  <rect x="9" y="3" width="22" height="22" rx="6" fill="#2C3640"/>
+  <!-- Wordmark -->
+  <text x="42" y="24" font-family="Inter, -apple-system, sans-serif" font-weight="600" font-size="18" fill="#2C3640" letter-spacing="-0.02em">hireprep<tspan fill="#6E7F8D" font-weight="400">.ai</tspan></text>
+</svg>
