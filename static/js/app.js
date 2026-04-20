@@ -163,7 +163,12 @@ async function triggerFeature(feature, triggerCard) {
 
   // Client-side validation
   if (!hasResume && !jd) {
-    showModal("Missing inputs", "This feature needs both a resume and a job description. Please upload your resume and paste the job description.");
+    if (needsResume) {
+      showModal("Missing inputs", "This feature needs both a resume and a job description. Please upload your resume and paste the job description.");
+    } else {
+      // practice_questions only needs a JD
+      showModal("Missing job description", "Please paste a job description to use this feature.");
+    }
     return;
   }
   if (needsResume && !hasResume) {
@@ -243,8 +248,9 @@ function showOutputSkeleton(feature) {
 }
 
 function hideOutputSkeleton() {
+  // Called on error — hide skeleton but don't reveal empty output-text
   outputSkeleton.classList.add("hidden");
-  outputText.classList.remove("hidden");
+  outputSection.classList.add("hidden");
 }
 
 function renderOutput(feature, text) {
